@@ -3,7 +3,7 @@
         <div class="col-sm-4 m-auto">
             <nav class="navbar navbar-expand-sm  navbar-dark m-0">
                 <img src="../assets/avatar.jpg" class="rounded float-left mr-3" width="40" height="40" alt="头像">
-                <form class="form-inline">
+                <form class="form-control-range m-auto">
                     <div class="input-group">
                         <input class="form-control" type="text" placeholder="Search or jump to...">
                         <div class="input-group-append">
@@ -16,14 +16,15 @@
         <div class="col-sm-4">
             <nav class="navbar navbar-expand-sm  navbar-dark m-0">
                 <ul class="navbar-nav">
-                    <li class="nav-item active mr-3">
-                        <a class="nav-link" href="#">首页 <span class="sr-only">(current)</span></a>
+                    <li class="nav-item mr-3">
+                        <router-link tag="a" :to="{name:'homeLink'}" class="nav-link">首页
+                        </router-link>
                     </li>
                     <li class="nav-item mr-3">
-                        <a class="nav-link" href="#">文章</a>
+                        <router-link class="nav-link" tag="a" :to="{name:'articleLink'}">文章</router-link>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">关于我</a>
+                        <router-link class="nav-link" tag="a" :to="{name:'aboutLink'}">关于我</router-link>
                     </li>
                 </ul>
             </nav>

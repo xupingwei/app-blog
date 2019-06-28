@@ -8,7 +8,7 @@
                                   style="height: 40px;width: 40px;"
                                   fit="cover"></el-image>
                     </a>
-                    <el-input style="width: 80%;" placeholder="请输入内容" v-model="searchContent">
+                    <el-input size="small" style="width: 80%;" placeholder="请输入内容" v-model="searchContent">
                         <el-button slot="append" icon="el-icon-search"></el-button>
                     </el-input>
                 </div>
@@ -98,6 +98,6 @@
         float: left;
         margin-left: 10px;
         border: 1px solid #545c64;
-        margin-top: 10px;
+        margin-top: 13px;
     }
 </style>

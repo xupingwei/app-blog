@@ -20,5 +20,7 @@
 </script>
 
 <style lang="scss">
-
+    .app-content {
+        margin: 10px;
+    }
 </style>

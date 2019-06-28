@@ -1,15 +1,23 @@
 <template>
     <div class="home">
-        <div class="container">
-            <h1>This is home page!</h1>
-        </div>
+        <article-brief></article-brief>
     </div>
 </template>
 
 <script>
 
+    import ArticleBrief from "../components/ArticleBrief";
+
     export default {
         name: 'home',
-        components: {}
+        components: {
+            "article-brief": ArticleBrief
+        }
     }
+
 </script>
+<style scoped>
+    .home {
+
+    }
+</style>

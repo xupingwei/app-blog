@@ -4,9 +4,9 @@
             <el-col :span="8">
                 <div class="search">
                     <a href="#">
-                        <el-image :src="headerUrl"
-                                  style="height: 40px;width: 40px;"
-                                  fit="cover"></el-image>
+                        <el-avatar :src="headerUrl"
+                                   shape="square"
+                                   :size="40"/>
                     </a>
                     <el-input size="small" style="width: 80%;" placeholder="请输入内容" v-model="searchContent">
                         <el-button slot="append" icon="el-icon-search"></el-button>
@@ -64,7 +64,7 @@
         data() {
             return {
                 // eslint-disable-next-line no-undef
-                headerUrl: "../assets/avatar.jpg",
+                headerUrl: "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4259300811,497831842&fm=26&gp=0.jpg",
                 searchContent: ""
             }
         }

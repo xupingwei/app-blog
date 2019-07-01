@@ -20,13 +20,13 @@
                          background-color="#545c64"
                          text-color="#fff"
                          active-text-color="#ffd04b">
-                    <el-menu-item index="1">
+                    <el-menu-item index="/home">
                         <router-link tag="li" :to="{name:'homeLink'}">首页</router-link>
                     </el-menu-item>
-                    <el-menu-item index="2">
+                    <el-menu-item index="/article">
                         <router-link tag="li" :to="{name:'articleLink'}">文章</router-link>
                     </el-menu-item>
-                    <el-menu-item index="3">
+                    <el-menu-item index="/about">
                         <router-link tag="li" :to="{name:'aboutLink'}">关于我</router-link>
                     </el-menu-item>
                 </el-menu>

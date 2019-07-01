@@ -1,26 +1,17 @@
 <template>
-    <div id="app" class="container-fluid">
-        <app-header></app-header>
-        <div class="app-content">
-            <router-view/>
-        </div>
+    <div id="app">
+        <router-view></router-view>
     </div>
 </template>
 
 
 <script>
-    import Header from "./components/Header"
 
     export default {
         name: 'app',
-        components: {
-            "app-header": Header,
-        }
+        components: {}
     }
 </script>
 
 <style lang="scss">
-    .app-content {
-        margin: 10px;
-    }
 </style>

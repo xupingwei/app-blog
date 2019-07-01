@@ -1,5 +1,7 @@
 <template>
-
+    <div class="article-details">
+        <h1>文章详情</h1>
+    </div>
 </template>
 
 <script>
@@ -9,5 +11,7 @@
 </script>
 
 <style scoped>
+    .article-details {
 
+    }
 </style>

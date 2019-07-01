@@ -5,6 +5,13 @@
             <el-radio-button :label="false">展开</el-radio-button>
             <el-radio-button :label="true">收起</el-radio-button>
         </el-radio-group>
+        <!--        <div class="lookup-home">-->
+        <!--            <router-link tag="a" target="_blank" :to="{name:'homeLink'}">-->
+        <!--                <div><i class="el-icon-s-home"></i>-->
+        <!--                    <span slot="title">查看主页</span>-->
+        <!--                </div>-->
+        <!--            </router-link>-->
+        <!--        </div>-->
         <div class="publish-content">
             <el-menu
                     :collapse="isCollapse"
@@ -15,13 +22,6 @@
                     <router-link tag="a" :to="{name:'createLink'}">
                         <div><i class="el-icon-edit"></i>
                             <span slot="title">文章编辑器</span>
-                        </div>
-                    </router-link>
-                </el-menu-item>
-                <el-menu-item index="/home">
-                    <router-link tag="a" target="_blank" :to="{name:'homeLink'}">
-                        <div><i class="el-icon-s-home"></i>
-                            <span slot="title">查看主页</span>
                         </div>
                     </router-link>
                 </el-menu-item>
@@ -47,8 +47,6 @@
     </div>
 </template>
 <script>
-
-
     import AdminHeader from "../../components/admin/AdminHeader";
 
     export default {
@@ -81,7 +79,6 @@
         margin-left: 5px;
         margin-bottom: 5px;
     }
-
 
     .publish-content {
         display: flex;

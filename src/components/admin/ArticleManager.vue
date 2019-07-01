@@ -21,8 +21,6 @@
                     width="120">
                 <el-link type="warning">警告链接</el-link>
                 <el-link type="danger">警告链接</el-link>
-                <el-link type="primary">警告链接</el-link>
-                <el-link type="warning">警告链接</el-link>
             </el-table-column>
             <el-table-column
                     prop="readCount"

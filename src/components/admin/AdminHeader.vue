@@ -10,7 +10,11 @@
                             <i class="el-icon-user el-icon--left"></i> {{username}}{{role}}
                           </span>
                     <el-dropdown-menu slot="dropdown" style="width: 15%">
-                        <el-dropdown-item icon="el-icon-setting" command="logout">退出登录</el-dropdown-item>
+                        <el-dropdown-item icon="el-icon-s-home" command="lookupHome">
+                            <span style="margin-left: 30px">查看主页</span>
+                        </el-dropdown-item>
+                        <el-dropdown-item icon="el-icon-s-tools" command="logout">
+                            <span style="margin-left: 30px">退出登录</span></el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
             </div>
@@ -29,7 +33,12 @@
         },
         methods: {
             handleCommand(command) {
-
+                if (command === 'lookupHome') {
+                    let routerUrl = this.$router.resolve({name: "homeLink"});
+                    window.open(routerUrl.href, '_blank');
+                } else if (command === "logout") {
+                    alert("退出");
+                }
             }
         }
     }

@@ -2,9 +2,8 @@
     <div class="home">
         <el-row :gutter="10">
             <el-col :span="14" :offset="1">
-                <article-brief></article-brief>
+                <home-article-brief></home-article-brief>
             </el-col>
-
             <el-col :span="8" :offset="1">
                 <el-card>
                     <h4>热门文章</h4>
@@ -20,13 +19,13 @@
 
 <script>
 
-    import ArticleBrief from "../components/ArticleBrief";
+    import HomeArticleBrief from "../components/HomeArticleBrief";
     import HotBrief from "../components/HotBrief";
 
     export default {
         name: 'home',
         components: {
-            "article-brief": ArticleBrief,
+            "home-article-brief": HomeArticleBrief,
             "hot-brief": HotBrief
         }
     }

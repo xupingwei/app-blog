@@ -2,7 +2,9 @@
     <div class="hot-brief">
         <el-divider></el-divider>
         <div class="hot-brief-title">
-            <p>Card组件Card组件Card组件</p>
+            <p>
+                <el-link>Card组件Card组件Card组件</el-link>
+            </p>
             <div class="i">
                 <i class="el-icon-view"></i>12
                 <i class="el-icon-thumb"></i>12
@@ -32,6 +34,10 @@
     .hot-brief-title p {
         margin-right: 10px;
         float: left;
+    }
+
+    .hot-brief-title .el-link {
+        font-weight: bold;
     }
 
     .hot-brief-title .i {

@@ -10,7 +10,18 @@
                     maxlength="100"
                     show-word-limit></el-input>
         </div>
-        <mavon-editor class="mavon-editor" :toolbars="markdownOption" v-model="handbook"/>
+        <mavon-editor class="mavon-editor"
+                      :ishljs="true"
+                      :tabSize="2"
+                      :toolbarsFlag="true"
+                      :boxShadow="true"
+                      placeholder="开始编辑..."
+                      fontSize="15px"
+                      codeStyle="monokai-sublime"
+                      :subfield="true"
+                      :navigation="false"
+                      :toolbars="markdownOption"
+                      v-model="handbook"/>
     </div>
 </template>
 
@@ -55,7 +66,67 @@
                     subfield: true, // 单双栏模式
                     preview: true, // 预览
                 },
-                handbook: "# Welcome "
+                handbook: "# 这是一级标题\n" +
+                    "## 这是二级标题\n" +
+                    "### 这是三级标题\n" +
+                    "#### 这是四级标题\n" +
+                    "##### 这是五级标题\n" +
+                    "###### 这是六级标题\n" +
+                    "\n" +
+                    "**这是加粗的文字**\n" +
+                    "*这是倾斜的文字*`\n" +
+                    "***这是斜体加粗的文字***\n" +
+                    "~~这是加删除线的文字~~\n" +
+                    "\n" +
+                    ">这是引用的内容\n" +
+                    ">>这是引用的内容\n" +
+                    ">>>>>>>>>>这是引用的内容\n" +
+                    "\n" +
+                    "---\n" +
+                    "----\n" +
+                    "***\n" +
+                    "*****\n" +
+                    "\n" +
+                    "[简书](http://jianshu.com)\n" +
+                    "[百度](http://baidu.com)\n" +
+                    "\n" +
+                    "- 列表内容\n" +
+                    "+ 列表内容\n" +
+                    "* 列表内容\n" +
+                    "\n" +
+                    "表头|表头|表头\n" +
+                    "---|:--:|---:\n" +
+                    "内容|内容|内容\n" +
+                    "内容|内容|内容\n" +
+                    "\n" +
+                    "```java\n" +
+                    " @Override\n" +
+                    "    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {\n" +
+                    "        //定义一个转换消息的对象a\n" +
+                    "        FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();\n" +
+                    "        //添加fastjson的配置信息 比如 ：是否要格式化返回的json数据\n" +
+                    "        FastJsonConfig fastJsonConfig = new FastJsonConfig();\n" +
+                    "        fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat,\n" +
+                    "                SerializerFeature.WriteNullStringAsEmpty,\n" +
+                    "                SerializerFeature.WriteMapNullValue,\n" +
+                    "                SerializerFeature.WriteNullListAsEmpty);\n" +
+                    "        //在转换器中添加配置信息\n" +
+                    "        fastConverter.setFastJsonConfig(fastJsonConfig);\n" +
+                    "        //将转换器添加到converters中\n" +
+                    "        converters.add(fastConverter);\n" +
+                    "    }\n" +
+                    "\n" +
+                    "    @Override\n" +
+                    "    public void addCorsMappings(CorsRegistry registry) {\n" +
+                    "        //前后端分离跨域\n" +
+                    "        registry.addMapping(\"/**\")\n" +
+                    "                .allowedOrigins(\"*\")  //配置IP地址\n" +
+                    "                .allowCredentials(true)\n" +
+                    "                .allowedMethods(\"GET\", \"POST\", \"DELETE\", \"PUT\")\n" +
+                    "                .maxAge(3600);\n" +
+                    "    }\n" +
+                    "\n" +
+                    "```"
             }
         }
     }

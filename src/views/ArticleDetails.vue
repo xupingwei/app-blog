@@ -1,7 +1,7 @@
 <template>
     <div class="article-details">
         <el-row :gutter="10">
-            <el-col :span="14" :offset="1">
+            <el-col :span="16" :offset="1">
                 <el-card>
                     <h2>这是标题这是标题这是标题</h2>
                     <div class="article-left-info">
@@ -18,9 +18,21 @@
                         <el-link type="primary">Android设计模式</el-link>
                         <el-link type="primary">java设计模式</el-link>
                     </div>
+                    <!--                    <pre v-highlightA>-->
+                    <!--                        <code>{{article.content}}</code>-->
+                    <!--                    </pre>-->
+                    <mavon-editor class="mavon-editor"
+                                  :subfield="false"
+                                  :defaultOpen="'preview'"
+                                  :toolbarsFlag="false"
+                                  :editable="false"
+                                  scrollStyle="true"
+                                  codeStyle="monokai-sublime"
+                                  :ishljs="true"
+                                  v-model="article.content"/>
                 </el-card>
             </el-col>
-            <el-col :span="8" :offset="1">
+            <el-col :span="6" :offset="1">
                 <el-card>
                     <div>
                         <el-avatar :size="60"
@@ -73,6 +85,69 @@
         name: "ArticleDetails",
         data() {
             return {
+                article: {
+                    content: "# 这是一级标题\n" +
+                        "## 这是二级标题\n" +
+                        "### 这是三级标题\n" +
+                        "#### 这是四级标题\n" +
+                        "##### 这是五级标题\n" +
+                        "###### 这是六级标题\n" +
+                        "\n" +
+                        "**这是加粗的文字**\n" +
+                        "*这是倾斜的文字*`\n" +
+                        "***这是斜体加粗的文字***\n" +
+                        "~~这是加删除线的文字~~\n" +
+                        "\n" +
+                        ">这是引用的内容\n" +
+                        ">>这是引用的内容\n" +
+                        ">>>>>>>>>>这是引用的内容\n" +
+                        "\n" +
+                        "---\n" +
+                        "----\n" +
+                        "***\n" +
+                        "*****\n" +
+                        "\n" +
+                        "[简书](http://jianshu.com)\n" +
+                        "[百度](http://baidu.com)\n" +
+                        "\n" +
+                        "- 列表内容\n" +
+                        "+ 列表内容\n" +
+                        "* 列表内容\n" +
+                        "\n" +
+                        "表头|表头|表头\n" +
+                        "---|:--:|---:\n" +
+                        "内容|内容|内容\n" +
+                        "内容|内容|内容\n" +
+                        "\n" +
+                        "```java\n" +
+                        " @Override\n" +
+                        "    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {\n" +
+                        "        //定义一个转换消息的对象a\n" +
+                        "        FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();\n" +
+                        "        //添加fastjson的配置信息 比如 ：是否要格式化返回的json数据\n" +
+                        "        FastJsonConfig fastJsonConfig = new FastJsonConfig();\n" +
+                        "        fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat,\n" +
+                        "                SerializerFeature.WriteNullStringAsEmpty,\n" +
+                        "                SerializerFeature.WriteMapNullValue,\n" +
+                        "                SerializerFeature.WriteNullListAsEmpty);\n" +
+                        "        //在转换器中添加配置信息\n" +
+                        "        fastConverter.setFastJsonConfig(fastJsonConfig);\n" +
+                        "        //将转换器添加到converters中\n" +
+                        "        converters.add(fastConverter);\n" +
+                        "    }\n" +
+                        "\n" +
+                        "    @Override\n" +
+                        "    public void addCorsMappings(CorsRegistry registry) {\n" +
+                        "        //前后端分离跨域\n" +
+                        "        registry.addMapping(\"/**\")\n" +
+                        "                .allowedOrigins(\"*\")  //配置IP地址\n" +
+                        "                .allowCredentials(true)\n" +
+                        "                .allowedMethods(\"GET\", \"POST\", \"DELETE\", \"PUT\")\n" +
+                        "                .maxAge(3600);\n" +
+                        "    }\n" +
+                        "\n" +
+                        "```"
+                },
                 headerUrl: "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4259300811,497831842&fm=26&gp=0.jpg"
             }
         }
@@ -149,8 +224,12 @@
         display: flex;
     }
 
-    .el-link{
+    .el-link {
         font-size: 12px;
         margin-left: 15px;
+    }
+
+    .mavon-editor {
+        margin-top: 20px;
     }
 </style>

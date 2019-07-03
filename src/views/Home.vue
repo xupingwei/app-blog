@@ -1,10 +1,10 @@
 <template>
     <div class="home">
         <el-row :gutter="10">
-            <el-col :span="14" :offset="1">
+            <el-col :span="14" :offset='1'>
                 <home-article-brief></home-article-brief>
             </el-col>
-            <el-col :span="8" :offset="1">
+            <el-col :span="8" :offset='1'>
                 <el-card>
                     <h4>热门文章</h4>
                     <hot-brief></hot-brief>

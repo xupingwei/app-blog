@@ -13,7 +13,7 @@
                     </el-input>
                 </div>
             </el-col>
-            <el-col :span="6" offset="1">
+            <el-col :span="6" :offset="1">
                 <el-menu :default-active="$route.path"
                          class="el-menu-demo"
                          mode="horizontal"
@@ -31,7 +31,7 @@
                     </el-menu-item>
                 </el-menu>
             </el-col>
-            <el-col :span="4" offset="5">
+            <el-col :span="4" :offset="5">
                 <el-menu mode="horizontal"
                          background-color="#24292E"
                          text-color="#fff"

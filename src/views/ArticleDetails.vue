@@ -1,7 +1,7 @@
 <template>
     <div class="article-details">
         <el-row :gutter="10">
-            <el-col :span="16" :offset="1">
+            <el-col :span="16" :offset='1'>
                 <el-card>
                     <h2>这是标题这是标题这是标题</h2>
                     <div class="article-left-info">
@@ -26,13 +26,13 @@
                                   :defaultOpen="'preview'"
                                   :toolbarsFlag="false"
                                   :editable="false"
-                                  scrollStyle="true"
+                                  :scrollStyle="true"
                                   codeStyle="monokai-sublime"
                                   :ishljs="true"
                                   v-model="article.content"/>
                 </el-card>
             </el-col>
-            <el-col :span="6" :offset="1">
+            <el-col :span="6" :offset='1'>
                 <el-card>
                     <div>
                         <el-avatar :size="60"

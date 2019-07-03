@@ -17,7 +17,7 @@
                 <el-menu :default-active="$route.path"
                          class="el-menu-demo"
                          mode="horizontal"
-                         background-color="#545c64"
+                         background-color="#24292E"
                          text-color="#fff"
                          active-text-color="#ffd04b">
                     <el-menu-item index="/home">
@@ -31,10 +31,9 @@
                     </el-menu-item>
                 </el-menu>
             </el-col>
-
             <el-col :span="4" offset="5">
                 <el-menu mode="horizontal"
-                         background-color="#545c64"
+                         background-color="#24292E"
                          text-color="#fff"
                          active-text-color="#ffd04b">
                     <el-menu-item index="4">
@@ -79,7 +78,7 @@
     .el-header {
         margin: 0;
         padding: 0;
-        background-color: #545c64;
+        background-color: #24292E;
         display: flex;
     }
 

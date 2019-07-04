@@ -10,7 +10,7 @@
             </div>
         </div>
         <p class="text-brief-size">
-            {{article.brief.length>100?article.brief.substring(0,100)+"...":article.brief}}
+            {{article.brief.length>80?article.brief.substring(0,80)+"...":article.brief}}
         </p>
     </div>
 </template>

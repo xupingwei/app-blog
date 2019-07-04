@@ -7,7 +7,7 @@
                 <el-card>
                     <div class="article-brief-title">
                         <h4>
-                            <el-link>{{article.title}}</el-link>
+                            <el-link @click="jumpDetails(article)">{{article.title}}</el-link>
                         </h4>
                         <el-link @click="jumpDetails(article)">详情<i class="el-icon-view el-icon--right"></i></el-link>
                     </div>

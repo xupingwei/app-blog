@@ -1,75 +1,21 @@
 <template>
     <div class="list-article-brief">
         <el-timeline>
-            <el-timeline-item timestamp="2018/4/12" placement="top">
+            <el-timeline-item v-for="article in articleList"
+                              :timestamp="article.pubTime"
+                              :key="article.pubTime"
+                              placement="top">
                 <el-card>
                     <div class="article-brief-title">
                         <h4>
-                            <el-link href="#">更新 Github 模板更新 Github 模板更新 Github 模板</el-link>
+                            <el-link @click="jumpDetails(article)">{{article.title}}</el-link>
                         </h4>
                     </div>
-                    <p>王小虎 提交于 2018/4/3 20:46王小虎 提交于 2018/4/3 20:46王小虎 提交于 2018/4/3 20:46
-                        王小虎 提交于 2018/4/3 20:46王小虎 提交于 2018/4/3 20:46王小虎 提交于 2018/4/3 20:46
-                        王小虎 提交于 2018/4/3 20:46王小虎 提交于 2018/4/3 20:46王小虎 提交于 2018/4/3 20:46
-                    </p>
+                    <p>{{article.brief}}</p>
                     <div class="i">
-                        <el-link>12<i class="el-icon-view el-icon--right"></i></el-link>
-                        <el-link>12<i class="el-icon-thumb el-icon--right"></i></el-link>
-                        <el-link>12<i class="el-icon-chat-dot-square el-icon--right"></i></el-link>
-                    </div>
-                </el-card>
-            </el-timeline-item>
-            <el-timeline-item timestamp="2018/4/12" placement="top">
-                <el-card>
-                    <div class="article-brief-title">
-                        <h4>
-                            <el-link href="#">更新 Github 模板更新 Github 模板更新 Github 模板</el-link>
-                        </h4>
-                    </div>
-                    <p>王小虎 提交于 2018/4/3 20:46王小虎 提交于 2018/4/3 20:46王小虎 提交于 2018/4/3 20:46
-                        王小虎 提交于 2018/4/3 20:46王小虎 提交于 2018/4/3 20:46王小虎 提交于 2018/4/3 20:46
-                        王小虎 提交于 2018/4/3 20:46王小虎 提交于 2018/4/3 20:46王小虎 提交于 2018/4/3 20:46
-                    </p>
-                    <div class="i">
-                        <el-link>12<i class="el-icon-view el-icon--right"></i></el-link>
-                        <el-link>12<i class="el-icon-thumb el-icon--right"></i></el-link>
-                        <el-link>12<i class="el-icon-chat-dot-square el-icon--right"></i></el-link>
-                    </div>
-                </el-card>
-            </el-timeline-item>
-            <el-timeline-item timestamp="2018/4/12" placement="top">
-                <el-card>
-                    <div class="article-brief-title">
-                        <h4>
-                            <el-link href="#">更新 Github 模板更新 Github 模板更新 Github 模板</el-link>
-                        </h4>
-                    </div>
-                    <p>王小虎 提交于 2018/4/3 20:46王小虎 提交于 2018/4/3 20:46王小虎 提交于 2018/4/3 20:46
-                        王小虎 提交于 2018/4/3 20:46王小虎 提交于 2018/4/3 20:46王小虎 提交于 2018/4/3 20:46
-                        王小虎 提交于 2018/4/3 20:46王小虎 提交于 2018/4/3 20:46王小虎 提交于 2018/4/3 20:46
-                    </p>
-                    <div class="i">
-                        <el-link>12<i class="el-icon-view el-icon--right"></i></el-link>
-                        <el-link>12<i class="el-icon-thumb el-icon--right"></i></el-link>
-                        <el-link>12<i class="el-icon-chat-dot-square el-icon--right"></i></el-link>
-                    </div>
-                </el-card>
-            </el-timeline-item>
-            <el-timeline-item timestamp="2018/4/12" placement="top">
-                <el-card>
-                    <div class="article-brief-title">
-                        <h4>
-                            <el-link href="#">更新 Github 模板更新 Github 模板更新 Github 模板</el-link>
-                        </h4>
-                    </div>
-                    <p>王小虎 提交于 2018/4/3 20:46王小虎 提交于 2018/4/3 20:46王小虎 提交于 2018/4/3 20:46
-                        王小虎 提交于 2018/4/3 20:46王小虎 提交于 2018/4/3 20:46王小虎 提交于 2018/4/3 20:46
-                        王小虎 提交于 2018/4/3 20:46王小虎 提交于 2018/4/3 20:46王小虎 提交于 2018/4/3 20:46
-                    </p>
-                    <div class="i">
-                        <el-link>12<i class="el-icon-view el-icon--right"></i></el-link>
-                        <el-link>12<i class="el-icon-thumb el-icon--right"></i></el-link>
-                        <el-link>12<i class="el-icon-chat-dot-square el-icon--right"></i></el-link>
+                        <el-link>{{article.browse}}<i class="el-icon-view el-icon--right"></i></el-link>
+                        <el-link>{{article.like}}<i class="el-icon-thumb el-icon--right"></i></el-link>
+                        <el-link>{{article.comment}}<i class="el-icon-chat-dot-square el-icon--right"></i></el-link>
                     </div>
                 </el-card>
             </el-timeline-item>
@@ -79,7 +25,21 @@
 
 <script>
     export default {
-        name: "ListArticleBrief"
+        name: "ListArticleBrief",
+        props: {
+            articleList: Array()
+        },
+        methods: {
+            jumpDetails(article) {
+                let routeUrl = this.$router.resolve({
+                    name: 'detailsLink',
+                    params: {
+                        article: article
+                    }
+                });
+                window.open(routeUrl.href, '_blank');
+            }
+        }
     }
 </script>
 

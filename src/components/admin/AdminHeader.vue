@@ -117,7 +117,7 @@
         color: white;
     }
 
-    .head-menu i{
+    .head-menu i {
         color: white;
     }
 </style>

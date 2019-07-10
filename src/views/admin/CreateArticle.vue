@@ -22,6 +22,65 @@
                       :navigation="false"
                       :toolbars="markdownOption"
                       v-model="handbook"/>
+        <el-divider></el-divider>
+        <div class="footer">
+            <el-row :gutter="10">
+                <el-col :span="2">
+                    <p class="label-text">文章简介：</p>
+                </el-col>
+                <el-col :span="20">
+                    <el-input
+                            type="textarea"
+                            autosize
+                            disabled
+                            placeholder="请输入内容"
+                            v-model="articleBrief">
+                    </el-input>
+                </el-col>
+            </el-row>
+            <el-row :gutter="10">
+                <el-col :span="2"><p class="label-text">文章分类:</p></el-col>
+                <el-col :span="6">
+                    <el-select v-model="selectedCategory" placeholder="请选择文章分类">
+                        <el-option
+                                v-for="item in categories"
+                                :key="item"
+                                :label="item"
+                                :value="item">
+                        </el-option>
+                    </el-select>
+                </el-col>
+                <el-col :span="2" :offset="1">
+                    <p class="label-text">文章关键字：</p>
+                </el-col>
+                <el-col :span="9">
+                    <el-tag
+                            :key="tag"
+                            v-for="tag in dynamicTags"
+                            closable
+                            :disable-transitions="false"
+                            @close="handleClose(tag)">
+                        {{tag}}
+                    </el-tag>
+                    <el-input
+                            class="input-new-tag"
+                            v-if="inputVisible"
+                            v-model="inputValue"
+                            ref="saveTagInput"
+                            size="small"
+                            @keyup.enter.native="handleInputConfirm"
+                            @blur="handleInputConfirm">
+                    </el-input>
+                    <el-button v-else class="button-new-tag" size="small" @click="showInput">+添加标签</el-button>
+                </el-col>
+            </el-row>
+            <el-row>
+                <el-col :span="10" :offset="2">
+                    <el-button type="danger" @click="publishArticle(1)">发布文章</el-button>
+                    <el-button type="danger" plain @click="publishArticle(2)">保存为草稿</el-button>
+                </el-col>
+            </el-row>
+        </div>
     </div>
 </template>
 
@@ -31,6 +90,19 @@
         data() {
             return {
                 articleTitle: "",
+                dynamicTags: ["标签一"],
+                inputVisible: false,
+                inputValue: "",
+                categories: ["设计模式", "Java编程技巧"],
+                selectedCategory: "",
+                articleBrief: " **这是加粗的文字**\n" +
+                    "                    *这是倾斜的文字*`\n" +
+                    "                    ***这是斜体加粗的文字***\n" +
+                    "                    ~~这是加删除线的文字~~\n" +
+                    "\n" +
+                    "                    >这是引用的内容\n" +
+                    "                    >>这是引用的内容\n" +
+                    "                    >>>>>>>>>>这是引用的内容",
                 markdownOption: {
                     bold: true, // 粗体
                     italic: true, // 斜体
@@ -128,6 +200,31 @@
                     "\n" +
                     "```"
             }
+        },
+        methods: {
+            handleClose(tag) {
+                this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
+            },
+            showInput() {
+                this.inputVisible = true;
+                this.$nextTick(_ => {
+                    this.$refs.saveTagInput.$refs.input.focus();
+                });
+            },
+
+            handleInputConfirm() {
+                let inputValue = this.inputValue;
+                if (inputValue) {
+                    this.dynamicTags.push(inputValue);
+                }
+                this.inputVisible = false;
+                this.inputValue = '';
+            },
+            publishArticle(status) {
+                //status 1:发布   2：保存为草稿
+                console.log(status);
+
+            }
         }
     }
 </script>
@@ -141,5 +238,39 @@
     .mavon-editor {
         width: 100%;
         min-height: 500px;
+    }
+
+    .footer {
+        padding: 10px;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        border: 1px solid #e1e1e1;
+    }
+
+    .el-row {
+        margin-top: 20px;
+        min-height: 100px;
+    }
+
+    .label-text {
+        font-size: 11px;
+    }
+
+    .el-tag + .el-tag {
+        margin-left: 10px;
+    }
+
+    .button-new-tag {
+        margin-left: 10px;
+        height: 32px;
+        line-height: 30px;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    .input-new-tag {
+        width: 90px;
+        margin-left: 10px;
+        vertical-align: bottom;
     }
 </style>

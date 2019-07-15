@@ -22,7 +22,7 @@
     export default {
         name: "article-brief",
         props: {
-            articleList: []
+            articleList: Array
         },
         data() {
             return {

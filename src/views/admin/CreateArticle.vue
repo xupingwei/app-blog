@@ -28,14 +28,11 @@
                 <el-col :span="2">
                     <p class="label-text">文章简介：</p>
                 </el-col>
-                <el-col :span="20">
-                    <el-input
-                            type="textarea"
-                            autosize
-                            disabled
-                            placeholder="请输入内容"
-                            v-model="articleBrief">
-                    </el-input>
+                <el-col :span="16">
+                    <div class="text-area" v-html="articleBrief"></div>
+                </el-col>
+                <el-col :span="4" :offset="1">
+                    <el-button type="primary" @click="excerptBrief()">自动摘录</el-button>
                 </el-col>
             </el-row>
             <el-row :gutter="10">
@@ -51,7 +48,7 @@
                     </el-select>
                 </el-col>
                 <el-col :span="2" :offset="1">
-                    <p class="label-text">文章关键字：</p>
+                    <p class="label-text">文章标签：</p>
                 </el-col>
                 <el-col :span="9">
                     <el-tag
@@ -77,7 +74,7 @@
             <el-row>
                 <el-col :span="10" :offset="2">
                     <el-button type="danger" @click="publishArticle(1)">发布文章</el-button>
-                    <el-button type="danger" plain @click="publishArticle(2)">保存为草稿</el-button>
+                    <el-button type="danger" plain @click="publishArticle(-1)">保存为草稿</el-button>
                 </el-col>
             </el-row>
         </div>
@@ -85,24 +82,19 @@
 </template>
 
 <script>
+    import marked from 'marked'
+
     export default {
         name: "CreateArticle",
         data() {
             return {
                 articleTitle: "",
-                dynamicTags: ["标签一"],
+                dynamicTags: [],
                 inputVisible: false,
                 inputValue: "",
                 categories: ["设计模式", "Java编程技巧"],
                 selectedCategory: "",
-                articleBrief: " **这是加粗的文字**\n" +
-                    "                    *这是倾斜的文字*`\n" +
-                    "                    ***这是斜体加粗的文字***\n" +
-                    "                    ~~这是加删除线的文字~~\n" +
-                    "\n" +
-                    "                    >这是引用的内容\n" +
-                    "                    >>这是引用的内容\n" +
-                    "                    >>>>>>>>>>这是引用的内容",
+                articleBrief: "",
                 markdownOption: {
                     bold: true, // 粗体
                     italic: true, // 斜体
@@ -144,24 +136,15 @@
                     "#### 这是四级标题\n" +
                     "##### 这是五级标题\n" +
                     "###### 这是六级标题\n" +
-                    "\n" +
                     "**这是加粗的文字**\n" +
                     "*这是倾斜的文字*`\n" +
                     "***这是斜体加粗的文字***\n" +
                     "~~这是加删除线的文字~~\n" +
-                    "\n" +
                     ">这是引用的内容\n" +
                     ">>这是引用的内容\n" +
                     ">>>>>>>>>>这是引用的内容\n" +
-                    "\n" +
-                    "---\n" +
-                    "----\n" +
-                    "***\n" +
-                    "*****\n" +
-                    "\n" +
                     "[简书](http://jianshu.com)\n" +
                     "[百度](http://baidu.com)\n" +
-                    "\n" +
                     "- 列表内容\n" +
                     "+ 列表内容\n" +
                     "* 列表内容\n" +
@@ -170,7 +153,6 @@
                     "---|:--:|---:\n" +
                     "内容|内容|内容\n" +
                     "内容|内容|内容\n" +
-                    "\n" +
                     "```java\n" +
                     " @Override\n" +
                     "    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {\n" +
@@ -201,7 +183,22 @@
                     "```"
             }
         },
+        mounted() {
+            this.markdown()
+        },
         methods: {
+            markdown() {
+                marked.setOptions({
+                    renderer: new marked.Renderer(),
+                    gfm: true,
+                    tables: true,
+                    breaks: false,
+                    pedantic: false,
+                    sanitize: false,
+                    smartLists: true,
+                    smartypants: false
+                });
+            },
             handleClose(tag) {
                 this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
             },
@@ -220,9 +217,65 @@
                 this.inputVisible = false;
                 this.inputValue = '';
             },
+            excerptBrief() {
+                if (this.handbook !== "") {
+                    this.articleBrief = marked(this.handbook.length > 200 ?
+                        this.handbook.substring(0, 200) : this.handbook);
+                    console.log(this.articleBrief);
+                }
+            },
             publishArticle(status) {
-                //status 1:发布   2：保存为草稿
-                console.log(status);
+                //status 1:发布   -1：保存为草稿
+
+                if (this.articleTitle === "") {
+                    this.$notify.warning({
+                        title: "警告",
+                        message: "请填写文章标题"
+                    });
+                    return;
+                }
+
+                if (this.articleBrief === "") {
+                    this.$notify.warning({
+                        title: "警告",
+                        message: "请填写文章简介"
+                    });
+                    return;
+                }
+
+                if (this.handbook === "") {
+                    this.$notify.warning({
+                        title: "警告",
+                        message: "请填写文章内容"
+                    });
+                    return;
+                }
+
+                if (this.selectedCategory === "") {
+                    this.$notify.warning({
+                        title: "警告",
+                        message: "请选择文章分类"
+                    });
+                    return;
+                }
+
+                if (this.dynamicTags.length === 0) {
+                    this.$notify.warning({
+                        title: "警告",
+                        message: "请添加文章标签"
+                    });
+                    return;
+                }
+
+                console.log(JSON.stringify(this.dynamicTags));
+                console.log(JSON.stringify(this.categories));
+                let params = new URLSearchParams();
+                params.append("brief", this.articleBrief);
+                params.append("title", this.articleTitle);
+                params.append("author", this.$store.state.userName);
+                params.append("content", this.handbook);
+                params.append("keyWords", JSON.stringify(this.dynamicTags));
+                params.append("classify", JSON.stringify(this.selectedCategory));
 
             }
         }
@@ -272,5 +325,14 @@
         width: 90px;
         margin-left: 10px;
         vertical-align: bottom;
+    }
+
+    .text-area {
+        width: 100%;
+        display: inline-block;
+        padding: 10px;
+        min-height: 60px;
+        border-radius: 5px;
+        border: 1px solid #e1e1e1;
     }
 </style>

@@ -10,7 +10,7 @@
                             :default-active="$route.path"
                             text-color="#ffffff"
                             mode="horizontal"
-                            active-text-color="#3f3f3f"
+                            active-text-color="#ffffff"
                             background-color="#20A0FF">
                         <el-menu-item index="/createArticle">
                             <router-link tag="li" :to="{name:'createLink'}">

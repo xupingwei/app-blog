@@ -10,19 +10,20 @@ import 'mavon-editor/dist/css/index.css'
 // highlight.js代码高亮指令
 import Highlight from './assets/utils/highlight';
 
-axios.defaults.baseURL = "http://localhost:8080/roomapi";
+axios.defaults.baseURL = "http://localhost:8080/";
 axios.defaults.timeout = 10 * 1000;
 // axios 请求拦截
-// axios.interceptors.request.use(config => {
-//     config.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
-//     let token = localStorage.getItem('token');
-//     if (token) {
-//         config.headers.common['token'] = localStorage.getItem('token');
-//     }
-//     return config
-// }, err => {
-//     return Promise.reject(err);
-// });
+axios.interceptors.request.use(config => {
+    config.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+    // let token = localStorage.getItem('token');
+    // if (token) {
+    // config.headers.common['token'] = localStorage.getItem('token');
+    config.headers.common['token'] = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjMyODM3NzIsInVzZXJuYW1lIjoiMTgyOTI0ODk0NzgifQ.h7JximtJgaW8RmAzXGZifrmTPeRWG43KNdNzeH9Se6s";
+    // }
+    return config
+}, err => {
+    return Promise.reject(err);
+});
 Vue.config.productionTip = false;
 Vue.prototype.axios = axios;
 

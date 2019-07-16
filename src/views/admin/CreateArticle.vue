@@ -266,16 +266,43 @@
                     });
                     return;
                 }
-
-                console.log(JSON.stringify(this.dynamicTags));
-                console.log(JSON.stringify(this.categories));
+                let tagParams = "";
+                this.dynamicTags.forEach(val => {
+                    tagParams += val + "|";
+                });
+                console.log(tagParams);
+                console.log(JSON.stringify(this.selectedCategory));
                 let params = new URLSearchParams();
                 params.append("brief", this.articleBrief);
                 params.append("title", this.articleTitle);
                 params.append("author", this.$store.state.userName);
                 params.append("content", this.handbook);
-                params.append("keyWords", JSON.stringify(this.dynamicTags));
+                params.append("keyWords", JSON.stringify(tagParams));
                 params.append("classify", JSON.stringify(this.selectedCategory));
+
+                this.axios.post("/admin/article/createArticle", params)
+                    .then(response => {
+                        return response.data;
+                    })
+                    .then(data => {
+                        if (data.code === 0) {
+                            return data.data;
+                        } else {
+                            this.$notify.error({
+                                title: "错误",
+                                message: data.msg
+                            });
+                        }
+                    })
+                    .then(data => {
+                        this.$notify.success("文章发布成功!")
+                    })
+                    .catch(error => {
+                        this.$notify.error({
+                            title: "错误",
+                            message: error.message
+                        });
+                    });
 
             }
         }
